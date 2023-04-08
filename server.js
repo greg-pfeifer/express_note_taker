@@ -21,3 +21,23 @@ app.get('/notes', (req, res) => {
 })
 
 app.get('/api/notes', (req, res) => res.json(data))
+
+app.post('/api/notes', (req, res) => {
+    let noteToSave = {
+        title: req.body.title,
+        text: req.body.text,
+        id: Math.random()
+        }
+        let parsedArray = data
+        parsedArray.push(noteToSave)
+        console.log(noteToSave)
+        fs.writeFile('./db/db.json', JSON.stringify(parsedArray), (err) => {
+            if (err)
+            return console.log(err)
+        })
+        res.json(parsedArray)
+        })
+
+app.listen(PORT, () => {
+    console.log('Server running')
+})
